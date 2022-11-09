@@ -3,7 +3,16 @@
 # define_argparser 함수
 import argparse
 
-import torch.cuda
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+from model import ImageClassifier
+from trainer import Trainer
+
+from utils import load_mnist
+from utils import split_data
+from utils import get_hidden_size
 
 
 def define_argparser() :
@@ -21,6 +30,7 @@ def define_argparser() :
     p.add_argument('--use_dropout', action='store_true')
     p.add_argument('--dropout_p', type=float, default=5)
 
+    # verbose => 여러가지 내용들을 장황하게 다 보여주는 것
     p. add_argument('--verbose', type=int, default=1)
 
     config = p.parse_args()
@@ -60,28 +70,20 @@ def main(config) :
 
     trainer = Trainer(model, optimizer, crit)
     
+    # 트레이닝이 일어남.
     trainer.train(
         train_data(x[0], y[0]),
         train_data(x[0], y[0]),
+        config = config
     )
+    
+    # Save best model weights.
+    torch.save({
+        'model' : trainer.model.state_dict(),
+        'opt' : optimizer.state_dict(),
+        'config' : config
+    }, config.model_fn)
 
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+if __name__ == '__main__' :
+    config = define_argparser()
+    main(config)
