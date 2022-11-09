@@ -40,7 +40,7 @@ class Block(nn.Module):
 
 
 # model.py : ImageClassifier 모델
-
+# 심층신경망 역할
 class ImageClassifier(nn.Module) :
   def __init__(self, input_size, output_size, hidden_sizes=[500,400,300,200,100], use_batch_norm=True, dropout_p=.3) :
 
