@@ -17,7 +17,7 @@ class Trainer() :
 
         super().__init__()
 
-
+    # 미니배치를 만들어 줌
     def _batchify(self, x, y, batch_size, random_split=True) :
         if random_split :
             indices = torch.randperm(x.size(0), device=x.device)
@@ -29,7 +29,7 @@ class Trainer() :
 
         return x, y
 
-
+    # 학습
     def _train(self, x, y, config) :
         self.model.train()
 
@@ -54,6 +54,7 @@ class Trainer() :
 
         return total_loss / len(x)
 
+    # 검증하는 부분
     def _validate(self, x, y, config) :
         # Turn evaluation mode on.
         self.model.eval()
@@ -74,6 +75,7 @@ class Trainer() :
 
             return total_loss / len(x)
 
+    # 실제 학습과 검증이 이루어지고 best model을 찾음
     def train(self, train_data, valid_data, config):
         lowest_loss = np.inf
         best_model = None
