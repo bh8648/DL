@@ -12,7 +12,7 @@ from trainer import Trainer
 
 from utils import load_mnist
 from utils import split_data
-from utils import get_hidden_size
+from utils import get_hidden_sizes
 
 
 def define_argparser() :
