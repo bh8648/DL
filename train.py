@@ -53,9 +53,26 @@ def main(config) :
     optimizer = optim.Adam(model.parameters())
     crit = nn.NLLLoss
     
-    if config
+    if config.verbose >= 1 :
+        print(model)
+        print(optimizer)
+        print(crit)
+
+    trainer = Trainer(model, optimizer, crit)
+    
+    trainer.train(
+        train_data(x[0], y[0]),
+        train_data(x[0], y[0]),
+    )
 
 
+    
+    
+    
+    
+    
+    
+    
     
     
     
